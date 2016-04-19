@@ -5,7 +5,7 @@ require_once "Kahvi.php";
  * Date: 4/17/16
  * Time: 5:32 PM
  */
-ini_set('display_errors', 1);
+
 
 
 if (isset($_POST["Tallenna"])) {
@@ -43,17 +43,10 @@ function debug($data)
     echo $output;
 }
 
-/* form check ei onnistunut :(
+ 
 
-if (!$nimiVirhe && !$lajiVirhe && !$kuvausVirhe && !$paahtoasteVirhe && !$tuotantomaaVirhe) {
-    if (mail($nimiVirhe, $lajiVirhe, $kuvausVirhe, $paahtoasteVirhe, $tuotantomaaVirhe)) {
-        $result = '<div class="alert alert-success">Kiitos lisäämästäsi kahvista!</div>';
 
-    } else {
-        $result = '<div class="alert alert-danger">Lisäys epäonnistui!</div>';
-    }
-}
-*/
+
 ?>
 
 
@@ -138,22 +131,22 @@ if (!$nimiVirhe && !$lajiVirhe && !$kuvausVirhe && !$paahtoasteVirhe && !$tuotan
             <div id="coffeeForm" class="container fluid text-center">
                 <h2> Lisää uusi kahvimaku</h2>
 
-                <form class="form-horizontal" role="form" method="POST" action="kahviForm.php">
+                <form class="form-horizontal"  method="POST" action="kahviForm.php">
                     <div class="form-group">
                         <label for="nimi" class="col-sm-2 control-label">Kahvin nimi</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name"
+                            <input type="text" class="form-control" id="name" name="nimi"
                                    placeholder="Kirjoita lisättävän kahvin nimi"
-                                   value="<?php print(htmlspecialchars($kahvi->getNimi(), ENT_QUOTES, "UTF-8")); ?>"
-                            <?php print "<span class='red'>" . $kahvi->getErrors($nimiVirhe) . "</span>"; ?>
+                                   value="<?php print(htmlspecialchars($kahvi->getNimi(), ENT_QUOTES, "UTF-8")); ?>">
+                            <?php print "<p class='text-danger'>" . $kahvi->getErrors($nimiVirhe) . "</p>"; ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="kahviLaji" class="col-sm-2 control-label">Kahvin Laji</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="kahvilaji" name="kahvilaji"
+                            <input type="text" class="form-control" id="kahvilaji" name="laji"
                                    placeholder="Nimeä Kahvin lajike:Esim Arabica, Robusta..."
-                                   value="<?php print(htmlspecialchars($kahvi->getLaji(), ENT_QUOTES, "UTF-8")); ?>"
+                                   value="<?php print(htmlspecialchars($kahvi->getLaji(), ENT_QUOTES, "UTF-8")); ?>">
                             <?php print "<p class='text-danger'>" . $kahvi->getErrors($lajiVirhe) . "</p>"; ?>
                         </div>
                     </div>
@@ -170,7 +163,7 @@ if (!$nimiVirhe && !$lajiVirhe && !$kuvausVirhe && !$paahtoasteVirhe && !$tuotan
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="paahtoaste" name="paahtoaste"
                                    placeholder="Kahvin paahtoaste: Tumma/kevyt/vaalea"
-                                   value="<?php print(htmlspecialchars($kahvi->getPaahtoaste(), ENT_QUOTES, "UTF-8")); ?>"">
+                                   value="<?php print(htmlspecialchars($kahvi->getPaahtoaste(), ENT_QUOTES, "UTF-8")); ?>">
                             <?php print "<p class='text-danger'>" . $kahvi->getErrors($paahtoasteVirhe) . "</p>"; ?>
                         </div>
                     </div>
@@ -179,16 +172,16 @@ if (!$nimiVirhe && !$lajiVirhe && !$kuvausVirhe && !$paahtoasteVirhe && !$tuotan
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="tuotantomaa" name="tuotantomaa"
                                    placeholder="Tuotantomaa: Missä kahvi on tehty"
-                                   value="<?php print(htmlspecialchars($kahvi->getTuotantomaa(), ENT_QUOTES, "UTF-8")); ?>"">
+                                   value="<?php print(htmlspecialchars($kahvi->getTuotantomaa(), ENT_QUOTES, "UTF-8")); ?>">
                             <?php print "<p class='text-danger'>" . $kahvi->getErrors($tuotantomaaVirhe) . "</p>"; ?>
                         </div>
                     </div>
                     <br>
                     <div class="form-group">
                         <div class="col-sm-10 col-sm-offset-2">
-                            <input name="submit" type="submit" value="Tallenna"
+                            <input name="Tallenna" type="submit" value="Tallenna"
                                    class="btn btn-success pull-left">
-                            <input name="submit" type="submit" value="Peruuta"
+                            <input name="Peruuta" type="submit" value="Peruuta"
                                    class="btn btn-danger pull-right">
                         </div>
                     </div>
@@ -215,26 +208,7 @@ if (!$nimiVirhe && !$lajiVirhe && !$kuvausVirhe && !$paahtoasteVirhe && !$tuotan
     <div class="container text-center">
         <p>Antti Häkkinen &copy; 2016</p>
         <br>
-        <div class="btn-group text-center">
-
-
-            <a href="https://www.facebook.com/anttihakkine" target="_blank"> <img src="img/fb.png"
-                                                                                  class="img-circle iconology "
-                                                                                  width="4%"></a>
-
-
-            <a href="https://github.com/Bytons" target="_blank"><img src="img/github.png" class="img-circle iconology "
-                                                                     width="4%"></a>
-
-
-            <a href="img/cv.pdf" target="_blank"> <img src="img/cvico.png" class="img-circle iconology " width="4%">
-            </a>
-
-            <a href="https://www.linkedin.com/in/antti-h%C3%A4kkinen-75b26a91" target="_blank"><img src="img/link.png"
-                                                                                                    class="img-circle iconology"
-                                                                                                    width="4%"></a>
-
-        </div> <!-- btn group ends -->
+       
 
     </div>
 </footer>

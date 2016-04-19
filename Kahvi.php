@@ -23,7 +23,8 @@ class Kahvi
         11 => "Tuotantomaa on pakollinen",
         12 => "laji ei saa sisältää kirosanoja",
         13 => "Laji ei saa sisältää erikoismerkkejä",
-        14 => "Lajike on pakollinen"
+        14 => "Lajike on pakollinen",
+		15 => "Paahtoaste on liian lythyt"
     );
 
 
@@ -37,7 +38,7 @@ class Kahvi
     function __construct($nimi = "", $laji = "", $kuvaus = "", $paahtoaste = "", $tuotantomaa = "")
     {
         $this->nimi = trim($nimi);
-        $this->laji = ($laji);
+        $this->laji = trim($laji);
         $this->kuvaus = trim($kuvaus);
         $this->paahtoaste = trim($paahtoaste);
         $this->tuotantomaa = trim($tuotantomaa);
@@ -63,10 +64,10 @@ class Kahvi
         if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $this->nimi)) {
             return 1;
         }
-        if (strlen($this->nimi <= 3)) {
+        if (strlen($this->nimi) <= 3) {
             return 3;
         }
-        if (strpos($this->nimi, 'perkele vittu saatana fuck shit ') !== false) {
+        if (strpos($this->nimi , 'perkele vittu saatana fuck shit ') !== false) {
             echo true;
             return 4;
 
@@ -95,10 +96,10 @@ class Kahvi
         if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $this->laji)) {
             return 13;
         }
-        if (strlen($this->laji <= 3)) {
+        if (strlen($this->laji) <= 3) {
             return 3;
         }
-        if (strpos($this->laji, 'perkele vittu saatana fuck shit ') !== false) {
+        if (strpos($this->laji, 'perkele   fuck shit ') !== false) {
             echo true;
             return 12;
 
@@ -125,13 +126,13 @@ class Kahvi
     {
 
         if ($required = true && strlen($this->kuvaus) == 0) {
-            return 2;
+            return 5;
         }
         if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $this->kuvaus)) {
             return 1;
         }
-        if (strlen($this->kuvaus <= 3)) {
-            return 3;
+        if (strlen($this->kuvaus) <= 3) {
+            return 6;
         }
         if (strpos($this->kuvaus, 'perkele vittu saatana fuck shit ') !== false) {
             echo true;
@@ -160,8 +161,8 @@ class Kahvi
         if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $this->paahtoaste)) {
             return 1;
         }
-        if (strlen($this->nimi <= 3)) {
-            return 3;
+        if (strlen($this->nimi) <= 3) {
+            return 15;
         }
         if (strpos($this->paahtoaste, 'tumma vaalea kevyt ') !== false) {
             echo true;
@@ -192,7 +193,7 @@ class Kahvi
         if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $this->tuotantomaa)) {
             return 1;
         }
-        if (strlen($this->tuotantomaa <= 3)) {
+        if (strlen($this->tuotantomaa) <= 3) {
             return 3;
         }else {
             return 0;
