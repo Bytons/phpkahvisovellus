@@ -13,7 +13,7 @@ class Kahvi
         0 => "",
         2 => "Nimi on pakollinen",
         3 => "Nimi on liian lyhyt",
-        4 => "Nimi ei saa sisältää kirosanoja",
+        4 => "Nimi ei saa sisältää epäsoveliaita sanoja",
         5 => "kuvaus on pakollinen",
         6 => "kuvaus on liian lyhyt",
         7 => "Kuvaus on liian pitkä",
@@ -24,7 +24,12 @@ class Kahvi
         12 => "laji ei saa sisältää kirosanoja",
         13 => "Laji ei saa sisältää erikoismerkkejä",
         14 => "Lajike on pakollinen",
-		15 => "Paahtoaste on liian lythyt"
+		15 => "Paahtoaste on liian lythyt",
+        16 => "Paahtoaste ei saa sisältää erikoismerkkejä!",
+        17 => "Kuvaus ei saa sisältää erikoismerkkejä",
+        18 => "Tuotantomaa ei saa sisältää erikoismerkkejä!",
+        19 => "Tuotantomaa on liian lyhyt!"
+
     );
 
 
@@ -67,8 +72,9 @@ class Kahvi
         if (strlen($this->nimi) <= 3) {
             return 3;
         }
-        if (strpos($this->nimi , 'perkele vittu saatana fuck shit ') !== false) {
-            echo true;
+        // yritin luoda epäsovelias sana chekkausta mutta en onnistunut saamaan sitä toimimaan. :(
+        if (preg_match('/kakka|paska|perse/pylly', $this->nimi)){
+
             return 4;
 
         } else {
@@ -76,6 +82,7 @@ class Kahvi
         }
 
     }
+
 
     public function getLaji()
     {
@@ -99,15 +106,6 @@ class Kahvi
         if (strlen($this->laji) <= 3) {
             return 3;
         }
-        if (strpos($this->laji, 'perkele   fuck shit ') !== false) {
-            echo true;
-            return 12;
-
-        } else {
-            return 0;
-        }
-
-
     }
 
 
@@ -129,18 +127,12 @@ class Kahvi
             return 5;
         }
         if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $this->kuvaus)) {
-            return 1;
+            return 17;
         }
         if (strlen($this->kuvaus) <= 3) {
             return 6;
         }
-        if (strpos($this->kuvaus, 'perkele vittu saatana fuck shit ') !== false) {
-            echo true;
-            return 8;
 
-        }else {
-            return 0;
-        }
     }
 
     public function getPaahtoaste()
@@ -159,12 +151,13 @@ class Kahvi
             return 10;
         }
         if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $this->paahtoaste)) {
-            return 1;
+            return 16;
         }
         if (strlen($this->nimi) <= 3) {
             return 15;
         }
-        if (strpos($this->paahtoaste, 'tumma vaalea kevyt ') !== false) {
+        //Tarkistaa onko paahtoaste jokin näistä.
+        if (strpos($this->paahtoaste, '/tumma/vaalea/kevyt ') !== false) {
             echo true;
             return 9;
 
@@ -191,10 +184,10 @@ class Kahvi
             return 11;
         }
         if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $this->tuotantomaa)) {
-            return 1;
+            return 18;
         }
-        if (strlen($this->tuotantomaa) <= 3) {
-            return 3;
+        if (strlen($this->tuotantomaa) <= 2) {
+            return 19;
         }else {
             return 0;
         }
