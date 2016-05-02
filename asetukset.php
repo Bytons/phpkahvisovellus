@@ -120,25 +120,7 @@ if (isset ( $_POST ["Aseta"] )) {
     <div class="container text-center">
         <p>Antti Häkkinen &copy; 2016</p>
         <br>
-        <div class="btn-group text-center">
-
-
-            <a href="https://www.facebook.com/anttihakkine" target="_blank"> <img src="img/fb.png"
-                                                                                  class="img-circle iconology "
-                                                                                  width="4%"></a>
-
-
-            <a href="https://github.com/Bytons" target="_blank"><img src="img/github.png" class="img-circle iconology "
-                                                                     width="4%"></a>
-
-s
-
-            <a href="https://www.linkedin.com/in/antti-h%C3%A4kkinen-75b26a91" target="_blank"><img src="img/link.png"
-                                                                                                    class="img-circle iconology"
-                                                                                                    width="4%"></a>
-
-        </div> <!-- btn group ends -->
-
+      
     </div>
 </footer>
 

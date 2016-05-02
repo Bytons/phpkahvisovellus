@@ -14,7 +14,7 @@ if (isset ( $_POST ["Korjaa"] )) {
 	header ( "location: index.php" );
 	exit ();
 } elseif (isset ( $_POST ["Tallenna"] )) {
-	unset($_SESSION["Tallenna"]);
+	unset($_SESSION["sumppi"]);
 	header ( "location: tallennettu.php" );
 	exit ();
 }
@@ -67,7 +67,7 @@ if (isset ( $_POST ["Korjaa"] )) {
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">
+            <a class="navbar-brand page-scroll" href="index.php">
                 <i class="fa fa-play-circle"></i> <span class="light">Haaga-helian Kahviklubi</span>
             </a>
         </div>
