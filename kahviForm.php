@@ -6,20 +6,44 @@ require_once "Kahvi.php";
  * Time: 5:32 PM
  */
 
-
+session_start ();
 
 if (isset($_POST["Tallenna"])) {
     $kahvi = new Kahvi  ($_POST["nimi"], $_POST["laji"], $_POST["kuvaus"], $_POST["paahtoaste"], $_POST["tuotantomaa"]);
 
+    $_SESSION ["sumppi"] = $kahvi;
+    
     $nimiVirhe = $kahvi->checkNimi();
     $lajiVirhe = $kahvi->checkLaji();
     $kuvausVirhe = $kahvi->checkKuvaus();
     $paahtoasteVirhe = $kahvi->checkPaahtoaste();
     $tuotantomaaVirhe = $kahvi->checkTuotantomaa();
+    
+    if ($nimiVirhe == 0 && lajiVirhe == 0 && kuvausVirhe == 0 && $paahtoasteVirhe == 0 && $tuotantomaaVirhe == 0) {
+    
+    	// Suljetaan istunto, koska sitä ei tarvita tällä sivulla
+    	session_write_close ();
+    	header ( "location: naytaKahvi.php" );
+    	exit ();
+    }
 
 } elseif (isset ($_POST ["Peruuta"])) {
-    header("location: index.php");
+	header ( "location: kahviForm.php" );
+	unset ( $_SESSION ["sumppi"] );
+	;
     exit ();
+}else {
+	if (isset ( $_SESSION ["sumppi"] )) {
+	
+		$kahvi = $_SESSION ["sumppi"];
+		
+		  $_SESSION ["sumppi"] = $kahvi;
+    
+    $nimiVirhe = $kahvi->checkNimi();
+    $lajiVirhe = $kahvi->checkLaji();
+    $kuvausVirhe = $kahvi->checkKuvaus();
+    $paahtoasteVirhe = $kahvi->checkPaahtoaste();
+    $tuotantomaaVirhe = $kahvi->checkTuotantomaa();
 } else {
 
     $kahvi = new Kahvi();
@@ -29,8 +53,9 @@ if (isset($_POST["Tallenna"])) {
     $kuvausVirhe = 0;
     $paahtoasteVirhe = 0;
     $tuotantomaaVirhe = 0;
-
+	}
 }
+
 //tällä voin debugata koodia consolille.
 function debug($data)
 {
@@ -42,6 +67,8 @@ function debug($data)
 
     echo $output;
 }
+
+ 
 
  
 
@@ -115,7 +142,7 @@ function debug($data)
                     <a class="page-scroll" href="#listaaKahvit.php">Listaa kahvit</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#">jotain</a>
+                    <a class="page-scroll" href="asetukset.php">Asetukset</a>
                 </li>
             </ul>
         </div>

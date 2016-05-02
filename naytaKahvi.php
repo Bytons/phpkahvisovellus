@@ -1,7 +1,19 @@
 <?php
+require_once "kahvi.php";
 
+
+session_start ();
+if (isset ( $_SESSION ["sumppi"] )) {
+	$kahvi = $_SESSION ["sumppi"];
+} else {
+	$kahvi = new Kahvi();
+}
+unset ( $_SESSION ["sumppi"] );
+
+setcookie ( "sumppi", $kahvi ->getNimi(), time () + 60 * 60 * 24 * 30 );
+$aika = date ( "d.m.Y", time () );
+setcookie ( "aika", $aika, time () + 60 * 60 * 24 * 30 );
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,12 +96,27 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h1 class="brand-heading">Kahvisovellus</h1>
+                  
+                    <?php
+print ("<h1>Annoit seuraavanlaiset tiedot:<br><br>Nimi: " . $kahvi->getNimi ()) ;
+print ("<br>Laji: " . $kahvi->getLaji()) ;
+print ("<br>Kuvaus: " . $kahvi->getKuvaus()) ;
+print ("<br>Paahtoaste: " . $kahvi->getPaahtoaste()) ;
+print ("<br>Tuotantomaa: " . $kahvi->getTuotantomaa(). "</h1>") ;
+?>							<a class="btn btn-success" href="tallennettu.php">Tallenna </a>
+                            <a class ="btn btn-danger" href="index.php">Peruuta</a>
+                            <a class="btn btn-info" href="kahviForm.php">Korjaa</a>
+                           <br>        
+                            <br>
                     <p class="intro-text">Haaga-Helian<br> Kahviklubi</p>
                 </div>
             </div>
         </div>
     </div>
 </header>
+
+
+
 
 
 <!-- Footer -->

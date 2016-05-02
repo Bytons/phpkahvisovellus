@@ -1,7 +1,6 @@
 <?php
-
+session.start();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +82,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <h1 class="brand-heading">Kahvisovellus</h1>
+                    <h1 class="brand-heading">Tiedot tallennettu!</h1>
                     <p class="intro-text">Haaga-Helian<br> Kahviklubi</p>
                 </div>
             </div>

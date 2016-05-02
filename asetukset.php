@@ -1,5 +1,5 @@
 <?php
-
+session.start();
 ?>
 
 
@@ -108,6 +108,7 @@
             <a href="https://github.com/Bytons" target="_blank"><img src="img/github.png" class="img-circle iconology "
                                                                      width="4%"></a>
 
+s
 
             <a href="https://www.linkedin.com/in/antti-h%C3%A4kkinen-75b26a91" target="_blank"><img src="img/link.png"
                                                                                                     class="img-circle iconology"
