@@ -1,5 +1,4 @@
 <?php
-session.start();
 ?>
 
 
@@ -83,7 +82,13 @@ session.start();
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <h1 class="brand-heading">Kahvisovellus</h1>
+                   <form action="index.php">
+                   <h2>Anna käyttäjänimi</h2>
+                   <input type="text" class="form-control" id="kayttajanimi" name="kayttajanimi" autofocus>
+                   <input type="submit" class="btn btn-success" value="Aseta käyttäjäsi" name="aseta_kayttaja">
+                   </form>
+                   
+                   
                     <p class="intro-text">Haaga-Helian<br> Kahviklubi</p>
                 </div>
             </div>
