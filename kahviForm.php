@@ -12,6 +12,7 @@ if (isset($_POST["Tallenna"])) {
     $kahvi = new Kahvi  ($_POST["nimi"], $_POST["laji"], $_POST["kuvaus"], $_POST["paahtoaste"], $_POST["tuotantomaa"]);
 
     $_SESSION ["sumppi"] = $kahvi;
+    session_write_close();
     
     $nimiVirhe = $kahvi->checkNimi();
     $lajiVirhe = $kahvi->checkLaji();
@@ -21,23 +22,19 @@ if (isset($_POST["Tallenna"])) {
     
     if ($nimiVirhe == 0 && lajiVirhe == 0 && kuvausVirhe == 0 && $paahtoasteVirhe == 0 && $tuotantomaaVirhe == 0) {
     
-    	// Suljetaan istunto, koska sitä ei tarvita tällä sivulla
     	session_write_close ();
     	header ( "location: naytaKahvi.php" );
     	exit ();
     }
 
 } elseif (isset ($_POST ["Peruuta"])) {
-	header ( "location: kahviForm.php" );
+	header ( "location: index.php" );
 	unset ( $_SESSION ["sumppi"] );
-	;
-    exit ();
+	exit();
 }else {
 	if (isset ( $_SESSION ["sumppi"] )) {
 	
 		$kahvi = $_SESSION ["sumppi"];
-		
-		  $_SESSION ["sumppi"] = $kahvi;
     
     $nimiVirhe = $kahvi->checkNimi();
     $lajiVirhe = $kahvi->checkLaji();
@@ -213,13 +210,6 @@ function debug($data)
                         </div>
                     </div>
 
-                    <!--
-                    <div class="form-group">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <?php echo $result; ?>
-                        </div>
-                    </div>
-                    -->
                 </form>
 
 

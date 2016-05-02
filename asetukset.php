@@ -1,4 +1,22 @@
 <?php
+require_once 'Kahvi.php';
+session_start();
+
+if(isset($_SESSION["sumppi"])) {
+	$kahvi = $_SESSION["sumppi"];
+
+} else {
+
+	$kahvi = new Kahvi();
+	$nimiVirhe = 0;
+}
+
+if (isset ( $_POST ["Aseta"] )) {
+	setcookie("kayttis", $_POST["kayttaja"], time()+60*60*24*7);
+	header ( "location: index.php" );
+
+}
+
 ?>
 
 
@@ -48,7 +66,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">
+            <a class="navbar-brand page-scroll" href="index.php">
                 <i class="fa fa-play-circle"></i> <span class="light">Haaga-helian Kahviklubi</span>
             </a>
         </div>
@@ -82,10 +100,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                   <form action="index.php">
+                   <form action="asetukset.php" method="post">
                    <h2>Anna käyttäjänimi</h2>
-                   <input type="text" class="form-control" id="kayttajanimi" name="kayttajanimi" autofocus>
-                   <input type="submit" class="btn btn-success" value="Aseta käyttäjäsi" name="aseta_kayttaja">
+                   <input type="text" class="form-control" id="kayttaja" name="kayttaja" autofocus  value="<?php if (isset($_COOKIE["kayttis"]))echo $_COOKIE["kayttis"]?>">
+                   <input type="submit" class="btn btn-success" value="Aseta" name="Aseta">
                    </form>
                    
                    

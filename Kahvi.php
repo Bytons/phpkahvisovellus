@@ -72,12 +72,7 @@ class Kahvi
         if (strlen($this->nimi) <= 3) {
             return 3;
         }
-        // yritin luoda epäsovelias sana chekkausta mutta en onnistunut saamaan sitä toimimaan. :(
-        if (preg_match('/kakka|paska|perse/pylly', $this->nimi)){
-
-            return 4;
-
-        } else {
+    	else {
             return 0;
         }
 
@@ -200,7 +195,7 @@ class Kahvi
         if (isset (self::$errorMessages [$errorNum]))
             return self::$errorMessages [$errorNum];
 
-        return self::$errorMessages [-1];
+        return self::$errorMessages [0];
     }
 }
 

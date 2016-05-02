@@ -5,14 +5,20 @@ require_once "kahvi.php";
 session_start ();
 if (isset ( $_SESSION ["sumppi"] )) {
 	$kahvi = $_SESSION ["sumppi"];
-} else {
-	$kahvi = new Kahvi();
 }
-unset ( $_SESSION ["sumppi"] );
+if (isset ( $_POST ["Korjaa"] )) {
+	header ( "location: kahviForm.php" );
+	exit ();
+}elseif (isset ( $_POST ["Peruuta"] )) {
+	unset($_SESSION["sumppi"]);
+	header ( "location: index.php" );
+	exit ();
+} elseif (isset ( $_POST ["Tallenna"] )) {
+	unset($_SESSION["Tallenna"]);
+	header ( "location: tallennettu.php" );
+	exit ();
+}
 
-setcookie ( "sumppi", $kahvi ->getNimi(), time () + 60 * 60 * 24 * 30 );
-$aika = date ( "d.m.Y", time () );
-setcookie ( "aika", $aika, time () + 60 * 60 * 24 * 30 );
 ?>
 
 <!DOCTYPE html>
@@ -103,9 +109,16 @@ print ("<br>Laji: " . $kahvi->getLaji()) ;
 print ("<br>Kuvaus: " . $kahvi->getKuvaus()) ;
 print ("<br>Paahtoaste: " . $kahvi->getPaahtoaste()) ;
 print ("<br>Tuotantomaa: " . $kahvi->getTuotantomaa(). "</h1>") ;
-?>							<a class="btn btn-success" href="tallennettu.php">Tallenna </a>
-                            <a class ="btn btn-danger" href="index.php">Peruuta</a>
-                            <a class="btn btn-info" href="kahviForm.php">Korjaa</a>
+?>							
+							
+							 <form action="naytaKahvi.php" method="post" id="kahvitiedot">
+         			
+               		 		<input type="submit" class="btn btn-info" name="Korjaa" value="Korjaa">
+                			<input type="submit"  class="btn btn-success" name="Tallenna" value="Tallenna">
+               				<input type="submit" class ="btn btn-danger" name="Peruuta" value="Peruuta">
+     
+       						 </form>
+						
                            <br>        
                             <br>
                     <p class="intro-text">Haaga-Helian<br> Kahviklubi</p>

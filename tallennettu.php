@@ -1,5 +1,5 @@
 <?php
-session.start();
+
 ?>
 
 <!DOCTYPE html>
