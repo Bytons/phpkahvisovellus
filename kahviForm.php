@@ -28,11 +28,10 @@ if (isset($_POST["Tallenna"])) {
     		$kantaSetit = new kahviPDO ();
     			
     		$id = $kantaSetit->lisaakahvi($kahvi);
-    		// Muutetaan istunnossa olevan olion id lisäykseltä saaduksi id:ksi
+
     		$_SESSION ["sumppi"]->setId ( $id );
     	} catch ( Exception $error ) {
     		session_write_close ();
-    		header ( "location: virhe.php?sivu=" . urlencode ( "Lisäys" ) . "&virhe=" . $error->getMessage () );
     		exit ();
     	}
     	

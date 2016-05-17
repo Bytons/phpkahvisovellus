@@ -1,3 +1,21 @@
+<?php 
+if (isset ($_POST ["poista"])) {
+	require_once "kahviPDO.php";
+	$kantaSetit = new kahviPDO ();
+	$kahvi = new Kahvi();
+	
+		$id =$kantaSetit->poistaKahvi($kahvi);
+}
+if (isset ($_POST ["nayta"])) {
+	require_once "kahviPDO.php";
+	$kantaSetit = new kahviPDO ();
+	$kahvi = new Kahvi();
+	$nimi = $kahvi->getNimi();
+
+	$id =$kantaSetit->haekahvit($nimi);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,16 +104,28 @@ try {
 	$kantaSetit = new kahviPDO ();
 
 	$rows= $kantaSetit->listaaKahvit();
-	
-	// Käydään oliotaulukko läpi
+
 	foreach ( $rows as $kahvi ) {
-		// $leffa on oliotaulukosta otettu yksittäinen Leffa-luokan olio
-		print ("<p>Nimi: " . $kahvi->getNimi ()) ;
-		print ("<br>Laji: " . $kahvi->getLaji ()) ;
-		print ("<br>Kuvaus: " . $kahvi->getKuvaus ()) ;
-		print ("<br>Paahtoaste: " . $kahvi->getPaahtoaste ()) ;
-		print ("<br>Tuotantomaa: " . $kahvi->getTuotantomaa() . "</p>\n") ;
+	
+print ("<p>Nimi: " . $kahvi->getNimi ()) ;
+print ("<br>Laji: " . $kahvi->getLaji ()) ;
+print ("<br>Kuvaus: " . $kahvi->getKuvaus ()) ;
+print ("<br>Paahtoaste: " . $kahvi->getPaahtoaste ()) ;
+print ("<br>Tuotantomaa: " . $kahvi->getTuotantomaa() . "</p>\n") ;	
+
+print("<form action='' method='post'>
+		<input type='hidden' name='id' value=''>
+		<input type='submit' class='btn btn-info' name='nayta' value='Näytä'>
+		<input type='submit' class='btn btn-danger' name='poista' value='Poista'>
+
+		</form>
+</br>
+		");
 	}
+	
+
+ 
+	
 } catch ( Exception $error ) {
 	//console.log('error');
 	exit ();

@@ -139,5 +139,10 @@ class kahviPDO {
 		$this->db->commit();
 		return $id;
 	}
+	function poistaKahvi($kahvi) {
+		$sql = "DELETE FROM kahvi WHERE id=1";
+		
+		}
+	
 }
 ?>
