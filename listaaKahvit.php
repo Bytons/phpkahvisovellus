@@ -1,13 +1,3 @@
-<?php
-
-?>
-
-
-<?php
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,8 +78,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <h1 class="brand-heading">Kahvisovellus</h1>
-                    <p class="intro-text">Haaga-Helian<br> Kahviklubi</p>
+                   
+                   <?php
+try {
+	require_once "kahviPDO.php";
+	
+	$kantaSetit = new kahviPDO ();
+
+	$rows= $kantaSetit->listaaKahvit();
+	
+	// Käydään oliotaulukko läpi
+	foreach ( $rows as $kahvi ) {
+		// $leffa on oliotaulukosta otettu yksittäinen Leffa-luokan olio
+		print ("<p>Nimi: " . $kahvi->getNimi ()) ;
+		print ("<br>Laji: " . $kahvi->getLaji ()) ;
+		print ("<br>Kuvaus: " . $kahvi->getKuvaus ()) ;
+		print ("<br>Paahtoaste: " . $kahvi->getPaahtoaste ()) ;
+		print ("<br>Tuotantomaa: " . $kahvi->getTuotantomaa() . "</p>\n") ;
+	}
+} catch ( Exception $error ) {
+	//console.log('error');
+	exit ();
+}
+
+?>                
                 </div>
             </div>
         </div>

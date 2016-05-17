@@ -22,6 +22,21 @@ if (isset($_POST["Tallenna"])) {
     
     if ($nimiVirhe == 0 && lajiVirhe == 0 && kuvausVirhe == 0 && $paahtoasteVirhe == 0 && $tuotantomaaVirhe == 0) {
     
+    	try {
+    		require_once "kahviPDO.php";
+    			
+    		$kantaSetit = new kahviPDO ();
+    			
+    		$id = $kantaSetit->lisaakahvi($kahvi);
+    		// Muutetaan istunnossa olevan olion id lisäykseltä saaduksi id:ksi
+    		$_SESSION ["sumppi"]->setId ( $id );
+    	} catch ( Exception $error ) {
+    		session_write_close ();
+    		header ( "location: virhe.php?sivu=" . urlencode ( "Lisäys" ) . "&virhe=" . $error->getMessage () );
+    		exit ();
+    	}
+    	
+    	
     	session_write_close ();
     	header ( "location: naytaKahvi.php" );
     	exit ();
@@ -136,7 +151,7 @@ function debug($data)
                     <a class="page-scroll" href="kahviForm.php">Lisää kahvi</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#listaaKahvit.php">Listaa kahvit</a>
+                    <a class="page-scroll" href="listaaKahvit.php">Listaa kahvit</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="asetukset.php">Asetukset</a>

@@ -32,7 +32,7 @@ class Kahvi
 
     );
 
-
+	private $id;
     private $nimi;
     private $laji;
     private $kuvaus;
@@ -40,14 +40,24 @@ class Kahvi
     private $tuotantomaa;
 
 
-    function __construct($nimi = "", $laji = "", $kuvaus = "", $paahtoaste = "", $tuotantomaa = "")
+    function __construct($nimi = "", $laji = "", $kuvaus = "", $paahtoaste = "", $tuotantomaa = "", $id = 0)
     {
         $this->nimi = trim($nimi);
         $this->laji = trim($laji);
-        $this->kuvaus = trim($kuvaus);
+        $this->kuvaus = ($kuvaus);
         $this->paahtoaste = trim($paahtoaste);
         $this->tuotantomaa = trim($tuotantomaa);
+        $this->id = $id;
     }
+    
+    public function setId($id) {
+    	$this->id = $id;
+    }
+    
+    public function getId() {
+    	return $this->id;
+    }
+    
 
 
     public function getNimi()

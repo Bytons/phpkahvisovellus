@@ -1,0 +1,17 @@
+DROP DATABASE a1400150;
+CREATE DATABASE a1400150;
+use a1400150;
+
+create table `kahvi` (
+    `id` int(10)unsigned NOT NULL AUTO_INCREMENT,
+    `nimi` varchar(25) NOT NULL,
+    `laji` varchar(25) NOT NULL,
+    `kuvaus` varchar(50) NOT NULL,
+    `paahtoaste` varchar(25) NOT NULL,
+    `tuotantomaa` varchar(25) NOT NULL,
+    PRIMARY KEY(`id`) 
+    
+)ENGINE=INNODB DEFAULT CHARSET=latin1;
+
+insert into `kahvi` (`nimi`,`laji`,`kuvaus`,`paahtoaste`,`tuotantomaa`)
+VALUES ('Kultapaahde','Arabica','Aromikas','tumma','Kenia')
